@@ -1,5 +1,20 @@
+import Count from "./Count";
+import CountButtons from "./CountButtons";
+import ResetButton from "./ResetButton";
+import Title from "./Title";
+
 function App() {
-  return <p>Hello</p>
+  return (
+    <main>
+      <div>
+        <Title />
+        <Count />
+        <ResetButton />
+
+        <CountButtons />
+      </div>
+    </main>
+  );
 }
 
 export default App;
