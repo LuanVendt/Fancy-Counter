@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Count from "./Count";
 import ButtonContainer from "./ButtonContainer";
 import ResetButton from "./ResetButton";
@@ -8,9 +8,21 @@ export default function Card() {
   const [count, setCount] = useState(0);
   const locked = count === 10 ? true : false;
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.code === "Space") setCount(count + 1);
+
+      count + 1 > 10 ? setCount(10) : null;
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [count]);
+
   return (
     <div className={`card ${locked ? "card--limit" : ""}`}>
-      <Title locked={locked}/>
+      <Title locked={locked} />
       <Count count={count} />
       <ResetButton setCount={setCount} />
       <ButtonContainer setCount={setCount} locked={locked} />
